@@ -9,8 +9,26 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var moveOnCircularPath = false
+    
     var body: some View {
-        Text("Hello World")
+        ZStack {
+            Circle()
+                .stroke()
+                .frame(width: 300, height: 300)
+                .foregroundColor(.orange)
+            
+            Image(systemName: "airplane")
+                .font(.largeTitle)
+                .foregroundColor(.blue)
+                .offset(y: -150)
+                .rotationEffect(.degrees(moveOnCircularPath ? 0 : -360))
+                .animation(Animation.linear(duration: 5) .repeatForever(autoreverses: false))
+                .onAppear() {
+                    self.moveOnCircularPath.toggle()
+            }
+        }
     }
 }
 
